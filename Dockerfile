@@ -1,7 +1,7 @@
 FROM alpine:latest
 MAINTAINER gerrit@scherpenzeel.de
 
-RUN apk add gcompat bash curl bzip2 ffmpeg cifs-utils alsa-utils icu-libs
+RUN apk add gcompat avahi dbus bash curl bzip2 ffmpeg cifs-utils alsa-utils icu-libs
 
 ENV ROON_SERVER_PKG RoonServer_linuxx64.tar.bz2
 ENV ROON_SERVER_URL https://download.roonlabs.net/builds/${ROON_SERVER_PKG}
