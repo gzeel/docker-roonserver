@@ -1,7 +1,7 @@
 # docker-roonserver
 RoonServer downloading Roon on first run
 
-This little project configures a docker image for running RoonServer.
+This  project configures a docker image for running RoonServer based on Alpine Linux.
 It downloads RoonServer if not found on an external volume.
 
 Example start:
@@ -13,7 +13,7 @@ Example start:
       -v roon-data:/data \
       -v roon-music:/music \
       -v roon-backups:/backup \
-      steefdebruijn/docker-roonserver:latest
+      gzeel/docker-roonserver:latest
   
   * You should set `TZ` to your timezone.
   * You can change the volume mappings to local file system paths if you like.
@@ -37,7 +37,7 @@ Example `systemd` service (adapt to your environment):
     TimeoutStopSec=180
     ExecStartPre=-/usr/bin/docker kill %n
     ExecStartPre=-/usr/bin/docker rm -f %n
-    ExecStartPre=/usr/bin/docker pull steefdebruijn/docker-roonserver
+    ExecStartPre=/usr/bin/docker pull gzeel/docker-roonserver
     ExecStart=/usr/bin/docker \
       run --name %n \
       --net=host \
@@ -46,7 +46,7 @@ Example `systemd` service (adapt to your environment):
       -v roon-data:/data \
       -v roon-music:/music \
       -v roon-backups:/backup \
-      steefdebruijn/docker-roonserver
+      gzeel/docker-roonserver
     ExecStop=/usr/bin/docker stop %n
     Restart=always
     RestartSec=10s
@@ -63,7 +63,7 @@ Example `docker-compose.yaml` (adapt to your environment):
     version: "3.7"
     services:
       docker-roonserver:
-        image: steefdebruijn/docker-roonserver:latest
+        image: gzeel/docker-roonserver:latest
         container_name: docker-roonserver
         hostname: docker-roonserver
         network_mode: host
@@ -134,11 +134,6 @@ I have not tried this myself, I do not use Roon extensions.
 
 ## Version history
 
-  * 2022-04-12: update base image to 'debian:11-slim'
-  * 2022-03-19: Fix download URL, follow redirects on download. Added specific usage scenarios in README.
-  * 2021-05-24: update base image to `debian:10.9-slim` and check for shared `/app` and `/data` folders.
-  * 2019-03-18: Fix example start (thanx @heapxor); add `systemd` example.
-  * 2019-01-23: updated base image to `debian-9.6`
-  * 2017-08-08: created initial images based on discussion on roonlabs forum
+  * 2023-05-03: Initial Commit
 
 
